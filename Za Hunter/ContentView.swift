@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
+    @State private var regan = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 42.15704, longitude: -88.14812), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Map(coordinateRegion: $regan)
     }
 }
 
@@ -19,3 +20,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

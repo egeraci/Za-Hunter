@@ -11,6 +11,7 @@ import CoreLocation
 class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject
 {
     var locationManager = CLLocationManager()
+    var geocoder = CLGeocoder()
     
     override init()
     {

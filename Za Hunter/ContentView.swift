@@ -17,12 +17,19 @@ struct ContentView: View {
     
     
     var body: some View {
-        Map(coordinateRegion: $regan, interactionModes: .all, showsUserLocation: true, userTrackingMode: $userTrackingMode, annotationItems: places)
+        Map(coordinateRegion: $regan,
+            interactionModes: .all,
+            showsUserLocation: true,
+            userTrackingMode: $userTrackingMode,
+            annotationItems: places)
             {
-            place in MapPin(coordinate: place.anadation.coordinate)
-                
+                place in
+                MapAnnotation(coordinate: place.anadation.coordinate)
+                {
+                    Marker(mapItem: place.mapidem)
+                }
             }
-        .onAppear(perform:
+            .onAppear(perform:
                     {
                         performsearch(item: "Pizza")
                     })
@@ -61,4 +68,19 @@ struct Place: Identifiable
     let id = UUID()
     let anadation: MKPointAnnotation
     let mapidem: MKMapItem
+}
+
+struct Marker: View
+{
+    var mapItem: MKMapItem
+    var body: some View
+    {
+        if let urll = mapItem.url
+        {
+            Link(destination: urll, label:
+                    {
+                        Image("pizza")
+                    })
+        }
+    }
 }

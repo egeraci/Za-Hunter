@@ -19,11 +19,13 @@ struct ContentView: View {
     var body: some View {
         Map(coordinateRegion: $regan, interactionModes: .all, showsUserLocation: true, userTrackingMode: $userTrackingMode, annotationItems: places)
             {
-            place in MapPin(coordinate: place.a)
-                {
-                    
-                }
-            })
+            place in MapPin(coordinate: place.anadation.coordinate)
+                
+            }
+        .onAppear(perform:
+                    {
+                        performsearch(item: "Pizza")
+                    })
         
     }
     

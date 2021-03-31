@@ -11,13 +11,14 @@ import MapKit
 struct ContentView: View {
     @State private var places = [Place]()
     @StateObject var locationManager = LocationManager()
-    @State private var userTrackingMode:MapUserTrackingMode = .follow
+    @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var regan = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 42.15704, longitude: -88.14812), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
    
     
     
-    var body: some View {
-        Map(coordinateRegion: $regan,
+    var body: some View
+            {
+            Map(coordinateRegion: $regan,
             interactionModes: .all,
             showsUserLocation: true,
             userTrackingMode: $userTrackingMode,
@@ -33,7 +34,6 @@ struct ContentView: View {
                     {
                         performsearch(item: "Pizza")
                     })
-        
     }
     
     func performsearch(item: String)
@@ -42,7 +42,7 @@ struct ContentView: View {
         searchReaquest.naturalLanguageQuery = item
         searchReaquest.region = regan
         let search = MKLocalSearch(request: searchReaquest)
-        search.start { (response, Error) in
+        search.start { (response, error) in
             if let response = response
             {
                 for mapitem in response.mapItems
@@ -75,12 +75,19 @@ struct Marker: View
     var mapItem: MKMapItem
     var body: some View
     {
+        
         if let urll = mapItem.url
         {
+            Print(mapItem.url)
             Link(destination: urll, label:
                     {
                         Image("pizza")
                     })
         }
+    }
+    func Print(_ data: Any)-> EmptyView
+    {
+        print(data)
+        return EmptyView()
     }
 }
